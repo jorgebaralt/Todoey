@@ -59,7 +59,6 @@
 				68708B9022089F77007F4A31 /* AppDelegate.swift */,
 				68708BA62208D01E007F4A31 /* Views */,
 				68708BA52208D00F007F4A31 /* Controllers */,
-				68708B9222089F77007F4A31 /* TodoListViewController.swift */,
 				68708BA42208D001007F4A31 /* Data Model */,
 				68708BA72208D107007F4A31 /* Supporting Files */,
 				68708B9C22089F78007F4A31 /* Info.plist */,
@@ -78,6 +77,7 @@
 		68708BA52208D00F007F4A31 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				68708B9222089F77007F4A31 /* TodoListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
