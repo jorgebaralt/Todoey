@@ -10,10 +10,14 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
     
-    let itemArray = ["Find Mike","Buy eggos", "Destroy Demogorgon"]
+    var itemArray = ["Find Mike","Buy eggos", "Destroy Demogorgon"]
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let items = defaults.array(forKey: "TodoListArray") as? [String]{
+            itemArray = items
+        }
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -30,7 +34,7 @@ class TodoListViewController: UITableViewController {
         return cell
     }
     //MARK - Table viee Delegate Methods
-        //fire when we click on any cell in the table view
+    //fire when we click on any cell in the table view
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(itemArray[indexPath.row])
         
@@ -41,6 +45,26 @@ class TodoListViewController: UITableViewController {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
+    //MARK - Add new items
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        var textField = UITextField()
+        // alert with text to add a new item
+        let alert = UIAlertController(title: "Add new Todoey Item", message: "", preferredStyle: .alert)
+        // add a textfield to the alert
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create new item"
+            textField = alertTextField
+        }
+        //add an action (button) to alert
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            //append item to array
+            self.itemArray.append(textField.text!)
+            self.defaults.set(self.itemArray, forKey: "TodoListArray");
+            self.tableView.reloadData()
+        }
+        alert.addAction(action);
+        present(alert,animated: true,completion: nil)
+    }
 }
 
